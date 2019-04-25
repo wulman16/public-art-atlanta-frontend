@@ -62,7 +62,9 @@ class App extends Component {
                                                    handleLogin={this.handleLogin}
                                                    handleSignup={this.handleSignup} />)} />
         <Route exact path="/index"
-               render={props => (<Index {...props} />)} />
+               render={props => (<Index {...props} userId={this.state.userid}
+                                                   userName={this.state.user.name}
+                                                   seen={this.state.user.seen}/>)} />
         <Route exact path="/new"
                render={props => (<New {...props} />)} />
       </Router>
