@@ -10,8 +10,18 @@ class App extends Component {
   state = {
     user: {
       id: null,
-      name: null
-    }
+      name: null,
+      seen: []
+    },
+    artworks: []
+  }
+
+  componentDidMount() {
+    fetch(`http://localhost:3000/artworks`)
+      .then(response => response.json())
+      .then(data => this.setState({
+        artworks: data
+      }))
   }
 
   handleLogin = name => {
@@ -25,7 +35,8 @@ class App extends Component {
       this.setState({
         user: {
           id: data[0].id,
-          name: data[0].name
+          name: data[0].name,
+          seen: data[0].user_artworks.map(ua => ua.artwork_id)
         }
       })} else {
         document.querySelector('.error-message').textContent = `Invalid login credentials!`
@@ -60,7 +71,10 @@ class App extends Component {
                                                    handleLogin={this.handleLogin}
                                                    handleSignup={this.handleSignup} />)} />
         <Route exact path="/index"
-               render={props => (<Index {...props} />)} />
+               render={props => (<Index {...props} userId={this.state.user.id}
+                                                   userName={this.state.user.name}
+                                                   seen={this.state.user.seen}
+                                                   artworks={this.state.artworks} />)} />
         <Route exact path="/new"
                render={props => (<New {...props} />)} />
       </Router>
