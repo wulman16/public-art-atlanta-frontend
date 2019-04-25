@@ -10,7 +10,8 @@ class App extends Component {
   state = {
     user: {
       id: null,
-      name: null
+      name: null,
+      seen: []
     }
   }
 
@@ -25,7 +26,8 @@ class App extends Component {
       this.setState({
         user: {
           id: data[0].id,
-          name: data[0].name
+          name: data[0].name,
+          seen: data[0].user_artworks.map(ua => ua.artwork_id)
         }
       })} else {
         document.querySelector('.error-message').textContent = `Invalid login credentials!`
