@@ -11,10 +11,10 @@ class Index extends Component {
         <h1 className="site-name">Public Art Atlanta</h1>
         <Header userId={this.props.userId}
                 userName={this.props.userName}
-                seen={this.props.seen} />
-        <BodyContainer userId={this.props.userId}
-                       userName={this.props.userName}
-                       seen={this.props.seen} />
+                seen={this.props.seen}
+                artworks={this.props.artworks} />
+        <BodyContainer seen={this.props.seen}
+                       artworks={this.props.artworks} />
       </Fragment>
     )
   }

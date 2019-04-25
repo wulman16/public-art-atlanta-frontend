@@ -12,7 +12,16 @@ class App extends Component {
       id: null,
       name: null,
       seen: []
-    }
+    },
+    artworks: []
+  }
+
+  componentDidMount() {
+    fetch(`http://localhost:3000/artworks`)
+      .then(response => response.json())
+      .then(data => this.setState({
+        artworks: data
+      }))
   }
 
   handleLogin = name => {
@@ -64,7 +73,8 @@ class App extends Component {
         <Route exact path="/index"
                render={props => (<Index {...props} userId={this.state.user.id}
                                                    userName={this.state.user.name}
-                                                   seen={this.state.user.seen}/>)} />
+                                                   seen={this.state.user.seen}
+                                                   artworks={this.state.artworks} />)} />
         <Route exact path="/new"
                render={props => (<New {...props} />)} />
       </Router>
