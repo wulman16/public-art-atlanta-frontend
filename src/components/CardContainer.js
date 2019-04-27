@@ -13,6 +13,7 @@ class CardContainer extends Component {
     return(
       <div>
         {this.props.artworks.map(artwork => <Card artworkTitle={artwork.title}
+        artworkProfile={artwork.profile}
         seen={this.handleSeen(artwork)} />)}
       </div>
     )

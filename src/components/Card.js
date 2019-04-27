@@ -6,6 +6,7 @@ class Card extends Component {
     return(
       <div>
         {this.props.artworkTitle}
+        {this.props.artworkProfile}
         {this.props.seen ? `true` : `false`}
       </div>
     )

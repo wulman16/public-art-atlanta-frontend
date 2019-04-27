@@ -65,7 +65,7 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <Route exact path="/(login|)"
+        <Route exact path="/login"
                render={props => (<Login {...props} userId={this.state.user.id}
                                                    userName={this.state.user.name}
                                                    handleLogin={this.handleLogin}
