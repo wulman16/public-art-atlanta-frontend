@@ -46,6 +46,11 @@ export class MapContainer extends Component {
           lng: this.avgValue(this.props.artworks, `lng`)
         }}
         >
+        {this.props.artworks.map(artwork => {
+          return <Marker onClick={this.onMarkerClick}
+                         name={artwork.title}
+                         position={{lat: artwork.lat , lng: artwork.lng }}/>
+        })}
         <Marker
           onClick={this.onMarkerClick}
           name={this.props.artworks[0].title}
