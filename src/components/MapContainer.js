@@ -1,19 +1,69 @@
 import React, { Component } from 'react'
-import { Map, GoogleApiWrapper } from 'google-maps-react'
+import { Map, GoogleApiWrapper, InfoWindow, Marker } from 'google-maps-react'
 
 const mapStyles = {
   width: `100%`,
   height: `100%`
 }
 
-class MapContainer extends Component {
+export class MapContainer extends Component {
+
+  state = {
+    showingInfoWindow: false,
+    activeMarker: {},
+    selectedPlace: {}
+  }
+
+  avgValue = (locations, type) => {
+    return locations.reduce((a, b) => a + b[type], 0) / locations.length
+  }
+
+  onMarkerClick = (props, marker, e) => {
+    this.setState({
+      selectedPlace: props,
+      activeMarker: marker,
+      showingInfoWindow: true
+    })
+  }
+
+  onClose = props => {
+    if (this.state.showingInfoWindow) {
+      this.setState({
+        showingInfoWindow: false,
+        activeMarker: null
+      })
+    }
+  }
+
   render() {
     return(
-      <div style={{ height: '400px', width: '700px', backgroundColor: 'grey' }}>
-        Map
-      </div>
+      <Map 
+        google={this.props.google}
+        zoom={11}
+        style={mapStyles}
+        initialCenter={{
+          lat: this.avgValue(this.props.artworks, `lat`),
+          lng: this.avgValue(this.props.artworks, `lng`)
+        }}
+        >
+        <Marker
+          onClick={this.onMarkerClick}
+          name={this.props.artworks[0].title}
+        />
+        <InfoWindow
+          marker={this.state.activeMarker}
+          visible={this.state.showingInfoWindow}
+          onClose={this.onClose}
+        >
+          <div>
+            <h4>{this.state.selectedPlace.name}</h4>
+          </div>
+        </InfoWindow>
+      </Map>
     )
   }
 }
 
-export default MapContainer
+export default GoogleApiWrapper({
+  apiKey: `${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`
+})(MapContainer)
