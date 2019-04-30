@@ -13,14 +13,16 @@ class App extends Component {
       name: null,
       seen: []
     },
-    artworks: []
+    artworks: [],
+    filteredArtworks: []
   }
 
   componentDidMount() {
     fetch(`http://localhost:3000/artworks`)
       .then(response => response.json())
       .then(data => this.setState({
-        artworks: data
+        artworks: data,
+        filteredArtworks: data
       }))
   }
 
@@ -70,11 +72,11 @@ class App extends Component {
                                                    userName={this.state.user.name}
                                                    handleLogin={this.handleLogin}
                                                    handleSignup={this.handleSignup} />)} />
-        <Route exact path="/index"
+        <Route exact path="/(index|)"
                render={props => (<Index {...props} userId={this.state.user.id}
                                                    userName={this.state.user.name}
                                                    seen={this.state.user.seen}
-                                                   artworks={this.state.artworks} />)} />
+                                                   artworks={this.state.filteredArtworks} />)} />
         <Route exact path="/new"
                render={props => (<New {...props} />)} />
       </Router>

@@ -1,6 +1,12 @@
 import React, { Component } from 'react'
+import { Map, GoogleApiWrapper } from 'google-maps-react'
 
-class Map extends Component {
+const mapStyles = {
+  width: `100%`,
+  height: `100%`
+}
+
+class MapContainer extends Component {
   render() {
     return(
       <div style={{ height: '400px', width: '700px', backgroundColor: 'grey' }}>
@@ -10,4 +16,4 @@ class Map extends Component {
   }
 }
 
-export default Map
+export default MapContainer
