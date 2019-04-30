@@ -24,7 +24,6 @@ class App extends Component {
       .then(response => response.json())
       .then(data => this.setState({
         artworks: data,
-        filteredArtworks: data
       }))
     // get user's location if geolocation is supported/enabled by browser
     if (navigator.geolocation) {
@@ -78,8 +77,38 @@ class App extends Component {
       }))
   }
 
+  sortByTitle = (a, b) => {
+    if (a.title.toLowerCase() < b.title.toLowerCase()) {
+      return -1
+    } else if (a.title.toLowerCase() > b.title.toLowerCase()) {
+      return 1
+    } else {
+      return 0
+    }
+  }
+
   handleSort = category => {
-    console.log(category)
+    switch (category) {
+      case `nearest`:
+        break
+      case `title`:
+        this.setState({
+          artworks: this.state.artworks.sort((a, b) => this.sortByTitle(a, b))
+        })
+        break
+      case `artist`:
+        this.setState({
+          pokemon: this.state.pokemon.sort((a, b) => this.sortByHP(a, b))
+        })
+        break
+      case `year`:
+        this.setState({
+          pokemon: this.state.pokemon.sort((a, b) => this.sortByType(a, b))
+        })
+        break
+      default:
+        console.log(`Invalid category!`)
+    }
   }
 
   render() {
