@@ -3,7 +3,6 @@ import './App.css';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Login from './components/Login'
 import Index from './components/Index'
-import New from './components/New'
 
 class App extends Component {
   
@@ -14,7 +13,10 @@ class App extends Component {
       seen: []
     },
     artworks: [],
-    filteredArtworks: []
+    currentLocation: {
+      lat: null,
+      lng: null
+    }
   }
 
   componentDidMount() {
@@ -24,6 +26,18 @@ class App extends Component {
         artworks: data,
         filteredArtworks: data
       }))
+    // get user's location if geolocation is supported/enabled by browser
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(pos => {
+        const coords = pos.coords
+        this.setState({
+          currentLocation: {
+            lat: coords.latitude,
+            lng: coords.longitude
+          }
+        })
+      })
+    }
   }
 
   handleLogin = name => {
@@ -64,7 +78,13 @@ class App extends Component {
       }))
   }
 
+  handleSort = category => {
+    console.log(category)
+  }
+
   render() {
+    // handle filter functionality here
+    const desiredArtworks = this.state.artworks
     return (
       <Router>
         <Route exact path="/login"
@@ -76,9 +96,8 @@ class App extends Component {
                render={props => (<Index {...props} userId={this.state.user.id}
                                                    userName={this.state.user.name}
                                                    seen={this.state.user.seen}
-                                                   artworks={this.state.filteredArtworks} />)} />
-        <Route exact path="/new"
-               render={props => (<New {...props} />)} />
+                                                   artworks={desiredArtworks}
+                                                   handleSort={this.handleSort} />)} />
       </Router>
     );
   }

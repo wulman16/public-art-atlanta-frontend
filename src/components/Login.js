@@ -6,7 +6,7 @@ import SignupForm from './SignupForm'
 class Login extends Component {
   render() {
     if (this.props.userId) {
-      return (<Redirect to="/index" />)
+      return (<Redirect to="/" />)
     } else {
       return(
         <Fragment>

@@ -2,18 +2,25 @@ import React, { Component, Fragment } from 'react'
 import MapContainer from './MapContainer'
 import Profile from './Profile'
 
+const divStyle = {
+  position: 'relative',
+  height: `75vh`
+}
+
 class Header extends Component {
   render() {
     return(
       <Fragment>
-        <MapContainer seen={this.props.seen}
-             artworks={this.props.artworks}/>
+        <div style={divStyle}>
+          <MapContainer seen={this.props.seen}
+              artworks={this.props.artworks}/>
+        </div>
         <Profile userId={this.props.userId}
                  userName={this.props.userName}
                  numSeen={this.props.seen.length}
                  numArtworks={this.props.artworks.length}/>
         <button>New Artwork</button>
-      </Fragment>
+    </Fragment>
     )
   }
 }

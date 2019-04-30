@@ -8,7 +8,7 @@ class BodyContainer extends Component {
     return(
       <Fragment>
         <FilterContainer />
-        <SortDialog />
+        <SortDialog handleSort={this.props.handleSort} />
         <CardContainer seen={this.props.seen}
                        artworks={this.props.artworks} />
       </Fragment>
