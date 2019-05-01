@@ -3,11 +3,13 @@ import { Redirect } from 'react-router'
 import Header from './Header'
 import BodyContainer from './BodyContainer'
 import Details from './Details'
+import New from './New'
 
 class Index extends Component {
 
   state = {
     detailsOpen: false,
+    newOpen: false,
     id: null,
     profile: ``
   }
@@ -25,6 +27,18 @@ class Index extends Component {
       detailsOpen: false,
       id: null,
       profile: ``
+    })
+  }
+
+  openNew = () => {
+    this.setState({
+      newOpen: true
+    })
+  }
+
+  closeNew = () => {
+    this.setState({
+      newOpen: false
     })
   }
 
@@ -50,10 +64,13 @@ class Index extends Component {
                  id={this.state.id}
                  seen={this.props.seen}
                  handleSeen={this.props.handleSeen} />
+        <New show={this.state.newOpen}
+             onClose={this.closeNew} />
         <Header userId={this.props.userId}
                 userName={this.props.userName}
                 seen={this.props.seen}
-                artworks={this.props.artworks} />
+                artworks={this.props.artworks}
+                openNew={this.openNew} />
         <BodyContainer seen={this.props.seen}
                        artworks={this.props.artworks}
                        handleSort={this.props.handleSort}

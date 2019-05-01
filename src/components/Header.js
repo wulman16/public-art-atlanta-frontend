@@ -9,6 +9,11 @@ const divStyle = {
 }
 
 class Header extends Component {
+
+  handleClick = () => {
+    this.props.openNew()
+  }
+
   render() {
     return(
       <Fragment>
@@ -20,7 +25,7 @@ class Header extends Component {
                  userName={this.props.userName}
                  numSeen={this.props.seen.length}
                  numArtworks={this.props.artworks.length}/>
-        <button>New Artwork</button>
+        <button onClick={this.handleClick}>New Artwork</button>
     </Fragment>
     )
   }
