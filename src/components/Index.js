@@ -48,6 +48,7 @@ class Index extends Component {
                  onClose={this.closeDetails}
                  profile={this.state.profile}
                  id={this.state.id}
+                 seen={this.props.seen}
                  handleSeen={this.props.handleSeen} />
         <Header userId={this.props.userId}
                 userName={this.props.userName}

@@ -38,7 +38,9 @@ class Details extends React.Component {
 
           <div className="footer">
             <button onClick={() => this.props.handleSeen(this.props.id)}>
-              Add to Seen
+              {this.props.seen.includes(this.props.id)
+                ? `Remove from Seen`
+                : `Add to Seen` }
             </button>
             <button onClick={this.props.onClose}>
               Close

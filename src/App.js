@@ -10,6 +10,7 @@ class App extends Component {
     user: {
       id: null,
       name: null,
+      userArtworks: [],
       seen: []
     },
     artworks: [],
@@ -52,6 +53,7 @@ class App extends Component {
         user: {
           id: data[0].id,
           name: data[0].name,
+          userArtworks: data[0].user_artworks,
           seen: data[0].user_artworks.map(ua => ua.artwork_id)
         }
       })} else {
@@ -79,6 +81,15 @@ class App extends Component {
   }
 
   handleSeen = artworkID => {
+    console.log(artworkID)
+    if (this.state.user.seen.includes(artworkID)) {
+      this.handleRemoveFromSeen(artworkID)
+    } else {
+      this.handleAddToSeen(artworkID)
+    }
+  }
+
+  handleAddToSeen = artworkID => {
     fetch(`http://localhost:3000/user_artworks`, {
       method: 'POST',
       headers: {
@@ -93,9 +104,29 @@ class App extends Component {
       .then(data => this.setState({
         user: {
           ...this.state.user,
-          seen: this.state.user.seen.concat(data.artwork_id)
+          seen: this.state.user.seen.concat(data.artwork_id),
+          userArtworks: this.state.user.userArtworks.concat(data)
         }
       }))
+  }
+
+  handleRemoveFromSeen = artworkID => {
+    const userArtworkID = this.state.user.userArtworks.find(ua => {
+      return ua.artwork_id === artworkID
+    }).id
+    fetch(`http://localhost:3000/user_artworks/${userArtworkID}`, {
+      method: 'DELETE'
+    }).then(data => this.setState({
+      user: {
+        ...this.state.user,
+        seen: this.state.user.seen.filter(a => {
+          return a !== artworkID
+        }),
+        userArtworks: this.state.user.userArtworks.filter(ua => {
+          return ua.id !== userArtworkID
+        })
+      }
+    }))
   }
 
   getMilesFromCoords = (lat1, lng1, lat2, lng2) => {
