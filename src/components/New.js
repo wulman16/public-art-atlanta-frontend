@@ -1,9 +1,13 @@
 import React from 'react'
 
 class New extends React.Component {
-  render() {
 
-    // TODO: render a little map inside the details dialog with the marker
+  handleArtworkSubmit = event => {
+    event.preventDefault()
+    console.log(event)
+  }
+
+  render() {
 
     // Render nothing if the "show" prop is false
     if(!this.props.show) {
@@ -34,7 +38,20 @@ class New extends React.Component {
     return (
       <div className="backdrop" style={{backdropStyle}}>
         <div className="modal" style={{modalStyle}}>
-          New Form Here!
+          <form onSubmit={e => this.handleArtworkSubmit(e)}>
+            <label>New Artwork</label>
+            <input type="text" placeholder="Title" name="title"></input>
+            <input type="text" placeholder="Artist" name="artist"></input>
+            <input type="text" placeholder="Year" name="year"></input>
+            <input type="text" placeholder="Image URL" name="image"></input>
+            <input type="text" placeholder="Medium" name="medium"></input>
+            <input type="text" placeholder="Owner" name="owner"></input>
+            <textarea placeholder="Profile" name="profile"></textarea>
+            <input type="text" placeholder="Latitude" name="lat"></input>
+            <input type="text" placeholder="Longitude" name="lng"></input>
+            <input type="text" placeholder="Source URL" name="source"></input>
+            <input type="submit" />
+          </form>
 
           <div className="footer">
             <button onClick={this.props.onClose}>

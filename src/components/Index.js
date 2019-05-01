@@ -42,16 +42,6 @@ class Index extends Component {
     })
   }
 
-  // openDetails = (profile) => {
-  //   const details = document.getElementById(`details`)
-  //   details.innerHTML = profile
-  //   if (typeof details.showModal === `function`) {
-  //     details.showModal()
-  //   } else {
-  //     alert(`The dialog API is not supported by this browser`)
-  //   }
-  // }
-
   render() {
     return(
       <Fragment>
