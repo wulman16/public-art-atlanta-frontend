@@ -51,10 +51,6 @@ export class MapContainer extends Component {
                          name={artwork.title}
                          position={{lat: artwork.lat , lng: artwork.lng }}/>
         })}
-        <Marker
-          onClick={this.onMarkerClick}
-          name={this.props.artworks[0].title}
-        />
         <InfoWindow
           marker={this.state.activeMarker}
           visible={this.state.showingInfoWindow}
