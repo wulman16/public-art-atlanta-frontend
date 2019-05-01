@@ -78,6 +78,26 @@ class App extends Component {
       }))
   }
 
+  handleSeen = artworkID => {
+    fetch(`http://localhost:3000/user_artworks`, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        user_id: this.state.user.id,
+        artwork_id: artworkID
+      })
+    }).then(response => response.json())
+      .then(data => this.setState({
+        user: {
+          ...this.state.user,
+          seen: this.state.user.seen.concat(data.artwork_id)
+        }
+      }))
+  }
+
   getMilesFromCoords = (lat1, lng1, lat2, lng2) => {
     const R = 3958.8 // radius of Earth in miles
     const dLat = this.degreesToRadians(lat2 - lat1)
@@ -218,9 +238,10 @@ class App extends Component {
                                                    seen={this.state.user.seen}
                                                    artworks={desiredArtworks}
                                                    handleSort={this.handleSort}
-                                                   handleFilter={this.handleFilter} />)} />
+                                                   handleFilter={this.handleFilter}
+                                                   handleSeen={this.handleSeen} />)} />
       </Router>
-    );
+    )
   }
 }
 

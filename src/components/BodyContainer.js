@@ -11,7 +11,8 @@ class BodyContainer extends Component {
         <SortDialog handleSort={this.props.handleSort}
                     handleFilter={this.props.handleFilter} />
         <CardContainer seen={this.props.seen}
-                       artworks={this.props.artworks} />
+                       artworks={this.props.artworks}
+                       openDetails={this.props.openDetails} />
       </Fragment>
     )
   }

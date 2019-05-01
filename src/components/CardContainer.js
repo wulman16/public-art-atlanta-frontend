@@ -17,7 +17,10 @@ class CardContainer extends Component {
                        artworkArtist={artwork.artist}
                        artworkYear = {artwork.year}
                        artworkImage={artwork.image}
-                       seen={this.handleSeen(artwork)} />})}
+                       artworkProfile={artwork.profile}
+                       artworkID={artwork.id}
+                       seen={this.handleSeen(artwork)}
+                       openDetails={this.props.openDetails} />})}
       </div>
     )
   }

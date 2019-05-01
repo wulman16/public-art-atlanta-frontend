@@ -8,15 +8,25 @@ class Card extends Component {
     width: `50px`
   }
 
+  divStyle = {
+    border: `2px solid black`,
+    margin: `5px`,
+    padding: `2px`
+  }
+
+  handleClick = () => {
+    this.props.openDetails(this.props.artworkProfile, this.props.artworkID)
+  }
+
   render() {
     return(
-      <div>
+      <div style={this.divStyle}>
         {/* TODO: handle null image */}
-        <img src={this.props.artworkImage} alt={this.props.artworkTitle} style={this.imageStyle}></img>
-        <div>{this.props.artworkTitle}</div>
+        <img onClick={this.handleClick} src={this.props.artworkImage} alt={this.props.artworkTitle} style={this.imageStyle}></img>
+        <div onClick={this.handleClick}>{this.props.artworkTitle}</div>
         <div>{this.props.artworkArtist}</div>
         <div>{this.props.artworkYear}</div>
-        {this.props.seen ? `true` : `false`}
+        {/* {this.props.seen ? `true` : `false`} */}
       </div>
     )
   }

@@ -4,7 +4,8 @@ import Profile from './Profile'
 
 const divStyle = {
   position: 'relative',
-  height: `75vh`
+  height: `75vh`,
+  backgroundColor: `grey`
 }
 
 class Header extends Component {
