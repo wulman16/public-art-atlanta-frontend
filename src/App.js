@@ -77,6 +77,37 @@ class App extends Component {
       }))
   }
 
+  getMilesFromCoords = (lat1, lng1, lat2, lng2) => {
+    const R = 3958.8 // radius of Earth in miles
+    const dLat = this.degreesToRadians(lat2 - lat1)
+    const dLng = this.degreesToRadians(lng2 - lng1)
+    const a = 
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(this.degreesToRadians(lat1)) * Math.cos(this.degreesToRadians(lat2)) *
+      Math.sin(dLng / 2) * Math.sin(dLng / 2)
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
+    const d = R * c
+    return d
+  }
+
+  degreesToRadians = degrees => {
+    return degrees * (Math.PI / 180)
+  }
+
+  sortByDistance = (a, b) => {
+    const userLat = this.state.currentLocation.lat
+    const userLng = this.state.currentLocation.lng
+    const distanceA = this.getMilesFromCoords(a.lat, a.lng, userLat, userLng)
+    const distanceB = this.getMilesFromCoords(b.lat, b.lng, userLat, userLng)
+    if (distanceA < distanceB) {
+      return -1
+    } else if (distanceA > distanceB) {
+      return 1
+    } else {
+      return 0
+    }
+  }
+
   sortByTitle = (a, b) => {
     if (a.title.toLowerCase() < b.title.toLowerCase()) {
       return -1
@@ -123,7 +154,9 @@ class App extends Component {
   handleSort = category => {
     switch (category) {
       case `nearest`:
-      // TODO: handle distance functionality
+        this.setState({
+          artworks: this.state.artworks.sort((a, b) => this.sortByDistance(a, b))
+        })
         break
       case `title`:
         this.setState({
