@@ -13,9 +13,9 @@ class Card extends Component {
       <div>
         {/* TODO: handle null image */}
         <img src={this.props.artworkImage} alt={this.props.artworkTitle} style={this.imageStyle}></img>
-        {this.props.artworkTitle}
-        {this.props.artworkArtist}
-        {this.props.artworkYear}
+        <div>{this.props.artworkTitle}</div>
+        <div>{this.props.artworkArtist}</div>
+        <div>{this.props.artworkYear}</div>
         {this.props.seen ? `true` : `false`}
       </div>
     )
