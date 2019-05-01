@@ -12,9 +12,12 @@ class CardContainer extends Component {
   render() {
     return(
       <div>
-        {this.props.artworks.map(artwork => <Card artworkTitle={artwork.title}
-        artworkProfile={artwork.profile}
-        seen={this.handleSeen(artwork)} />)}
+        {this.props.artworks.map(artwork => {
+          return <Card artworkTitle={artwork.title}
+                       artworkArtist={artwork.artist}
+                       artworkYear = {artwork.year}
+                       artworkImage={artwork.image}
+                       seen={this.handleSeen(artwork)} />})}
       </div>
     )
   }
