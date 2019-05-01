@@ -87,9 +87,43 @@ class App extends Component {
     }
   }
 
+  getArtistLastName = artwork => {
+    return artwork.artist.split(` `).splice(-1)[0].toLowerCase()
+  }
+
+  sortByArtist = (a, b) => {
+    const artistA = this.getArtistLastName(a)
+    const artistB = this.getArtistLastName(b)
+    if (artistA < artistB) {
+      return -1
+    } else if (artistA > artistB) {
+      return 1
+    } else {
+      return 0
+    }
+  }
+
+  parseYear = artwork => {
+    return parseInt(artwork.year.split(`-`).map(text => text.match(/\d+/g))[0])
+  }
+
+  sortByYear = (a, b) => {
+    const yearA = this.parseYear(a)
+    const yearB = this.parseYear(b)
+    console.log(yearA)
+    if (yearA < yearB) {
+      return -1
+    } else if (yearA > yearB) {
+      return 1
+    } else {
+      return 0
+    }
+  }
+
   handleSort = category => {
     switch (category) {
       case `nearest`:
+      // TODO: handle distance functionality
         break
       case `title`:
         this.setState({
@@ -98,12 +132,12 @@ class App extends Component {
         break
       case `artist`:
         this.setState({
-          pokemon: this.state.pokemon.sort((a, b) => this.sortByHP(a, b))
+          artworks: this.state.artworks.sort((a, b) => this.sortByArtist(a, b))
         })
         break
       case `year`:
         this.setState({
-          pokemon: this.state.pokemon.sort((a, b) => this.sortByType(a, b))
+          artworks: this.state.artworks.sort((a, b) => this.sortByYear(a, b))
         })
         break
       default:
