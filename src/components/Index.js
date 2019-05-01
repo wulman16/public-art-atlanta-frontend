@@ -15,7 +15,8 @@ class Index extends Component {
                 artworks={this.props.artworks} />
         <BodyContainer seen={this.props.seen}
                        artworks={this.props.artworks}
-                       handleSort={this.props.handleSort} />
+                       handleSort={this.props.handleSort}
+                       handleFilter={this.props.handleFilter} />
       </Fragment>
     )
   }

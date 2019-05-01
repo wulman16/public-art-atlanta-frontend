@@ -16,7 +16,8 @@ class App extends Component {
     currentLocation: {
       lat: null,
       lng: null
-    }
+    },
+    filter: `all`
   }
 
   componentDidMount() {
@@ -95,8 +96,13 @@ class App extends Component {
   }
 
   sortByDistance = (a, b) => {
-    const userLat = this.state.currentLocation.lat
-    const userLng = this.state.currentLocation.lng
+    let userLat = this.state.currentLocation.lat
+    let userLng = this.state.currentLocation.lng
+    // use default location if user location is unavailable
+    if (userLat === null) {
+      userLat = 33.7871877
+      userLng = -84.3826425
+    }
     const distanceA = this.getMilesFromCoords(a.lat, a.lng, userLat, userLng)
     const distanceB = this.getMilesFromCoords(b.lat, b.lng, userLat, userLng)
     if (distanceA < distanceB) {
@@ -168,19 +174,37 @@ class App extends Component {
           artworks: this.state.artworks.sort((a, b) => this.sortByArtist(a, b))
         })
         break
-      case `year`:
+      case `oldest`:
         this.setState({
           artworks: this.state.artworks.sort((a, b) => this.sortByYear(a, b))
         })
         break
+      case `newest`:
+        this.setState({
+          artworks: this.state.artworks.sort((a, b) => this.sortByYear(a, b)).reverse()
+        })
+        break  
       default:
         console.log(`Invalid category!`)
     }
   }
 
+  handleFilter = medium => {
+    this.setState({
+      filter: medium
+    })
+  }
+
   render() {
-    // handle filter functionality here
-    const desiredArtworks = this.state.artworks
+    // handle filtering by medium
+    let desiredArtworks
+    if (this.state.filter === `all`) {
+      desiredArtworks = this.state.artworks
+    } else {
+      desiredArtworks = this.state.artworks.filter(artwork => {
+        return artwork.medium === this.state.filter
+      })
+    }
     return (
       <Router>
         <Route exact path="/login"
@@ -193,7 +217,8 @@ class App extends Component {
                                                    userName={this.state.user.name}
                                                    seen={this.state.user.seen}
                                                    artworks={desiredArtworks}
-                                                   handleSort={this.handleSort} />)} />
+                                                   handleSort={this.handleSort}
+                                                   handleFilter={this.handleFilter} />)} />
       </Router>
     );
   }
