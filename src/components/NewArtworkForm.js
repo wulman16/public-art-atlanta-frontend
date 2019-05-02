@@ -25,9 +25,12 @@ class NewArtworkForm extends React.Component {
 
   handleSubmit = event => {
     event.preventDefault()
-    if (this.handleIncompleteSubmission(event)) {
+    if (this.incompleteSubmission(event)) {
       const error = document.querySelector(`.new-artwork-error-message`)
       error.textContent = `Fields with * are required!`
+    } else if (this.badCoordinates(event)) {
+      const error = document.querySelector(`.new-artwork-error-message`)
+      error.textContent = `Latitude and Longitude must correspond to valid Atlanta coordinates!`
     } else {
       let artworkObject = {}
       for (let key in this.state) {
@@ -39,14 +42,26 @@ class NewArtworkForm extends React.Component {
     }
   }
 
-  handleIncompleteSubmission = event => {
+  incompleteSubmission = event => {
     return (!event.target.image.value ||
       !event.target.lat.value ||
       !event.target.lng.value)
   }
 
+  badCoordinates = event => {
+    const lat = parseFloat(event.target.lat.value)
+    const lng = parseFloat(event.target.lng.value)
+    return (!lat || lat > 33.930925 || lat < 33.629466 ||
+           !lng || lng > -84.227898 || lng < -84.587811)
+  }
+
   handleEmptyField = input => {
     return input.length === 0 ? null : input
+  }
+
+  handleClose = () => {
+    this.setState(() => this.initialState)
+    this.props.onClose()
   }
 
   render() {
@@ -117,7 +132,7 @@ class NewArtworkForm extends React.Component {
           </form>
 
           <div className="footer">
-            <button onClick={this.props.onClose}>
+            <button onClick={this.handleClose}>
               Close
             </button>
           </div>

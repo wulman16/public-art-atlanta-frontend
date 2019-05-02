@@ -36,7 +36,7 @@ export class MapContainer extends Component {
   }
 
   render() {
-    return (<div style={mapStyles}></div>)
+    // return (<div style={mapStyles}></div>)
     return(
       <Map 
         google={this.props.google}
