@@ -3,7 +3,7 @@ import { Redirect } from 'react-router'
 import Header from './Header'
 import BodyContainer from './BodyContainer'
 import Details from './Details'
-import New from './New'
+import NewArtworkForm from './NewArtworkForm'
 
 class Index extends Component {
 
@@ -54,8 +54,9 @@ class Index extends Component {
                  id={this.state.id}
                  seen={this.props.seen}
                  handleSeen={this.props.handleSeen} />
-        <New show={this.state.newOpen}
-             onClose={this.closeNew} />
+        <NewArtworkForm show={this.state.newOpen}
+                        onClose={this.closeNew}
+                        handleArtworkSubmit={this.props.handleArtworkSubmit} />
         <Header userId={this.props.userId}
                 userName={this.props.userName}
                 seen={this.props.seen}

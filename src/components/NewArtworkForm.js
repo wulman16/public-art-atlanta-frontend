@@ -1,8 +1,8 @@
 import React from 'react'
 
-class New extends React.Component {
+class NewArtworkForm extends React.Component {
 
-  state = {
+  initialState = {
     title: ``,
     artist: ``,
     year: ``,
@@ -14,6 +14,8 @@ class New extends React.Component {
     lng: ``,
     source: ``
   }
+
+  state = this.initialState
 
   handleChange = event => {
     this.setState({
@@ -31,8 +33,9 @@ class New extends React.Component {
       for (let key in this.state) {
         artworkObject[key] = this.handleEmptyField(this.state[key])
       }
-      console.log(artworkObject)
-      // this.props.handleArtworkSubmit(artworkObject)
+      this.props.handleArtworkSubmit(artworkObject)
+      this.setState(() => this.initialState)
+      this.props.onClose()
     }
   }
 
@@ -90,7 +93,7 @@ class New extends React.Component {
                     value={this.state.image} onChange={this.handleChange} ></input>
             <select value={this.state.medium} onChange={this.handleChange}
                     name="medium">
-              <option value="" selected disabled>Medium</option>
+              <option value="" disabled>Medium</option>
               <option value="sculpture">Sculpture</option>
               <option value="mural">Mural</option>
               <option value="monument">Monument</option>
@@ -124,4 +127,4 @@ class New extends React.Component {
   }
 }
 
-export default New
+export default NewArtworkForm

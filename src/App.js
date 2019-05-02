@@ -246,6 +246,39 @@ class App extends Component {
     })
   }
 
+  handleArtworkSubmit = artwork => {
+    fetch(`http://localhost:3000/artworks`, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type':  'application/json'
+      },
+      body: JSON.stringify(artwork)
+    }).then(response => response.json())
+      .then(data => this.setState({
+        artworks: this.state.artworks.concat(data)
+      }))
+  }
+
+  // handleSignup = userName => {
+  //   fetch(`http://localhost:3000/users`, {
+  //     method: 'POST',
+  //     headers: {
+  //       'Accept': 'application/json',
+  //       'Content-Type': 'application/json'
+  //     },
+  //     body: JSON.stringify({
+  //       name: userName
+  //     })
+  //   }).then(response => response.json())
+  //     .then(data => this.setState({
+  //       user: {
+  //         id: data.id,
+  //         name: data.name
+  //       }
+  //     }))
+  // }
+
   render() {
     // handle filtering by medium
     let desiredArtworks
@@ -270,7 +303,8 @@ class App extends Component {
                                                    artworks={desiredArtworks}
                                                    handleSort={this.handleSort}
                                                    handleFilter={this.handleFilter}
-                                                   handleSeen={this.handleSeen} />)} />
+                                                   handleSeen={this.handleSeen}
+                                                   handleArtworkSubmit={this.handleArtworkSubmit} />)} />
       </Router>
     )
   }
