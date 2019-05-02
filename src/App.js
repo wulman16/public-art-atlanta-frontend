@@ -81,7 +81,6 @@ class App extends Component {
   }
 
   handleSeen = artworkID => {
-    console.log(artworkID)
     if (this.state.user.seen.includes(artworkID)) {
       this.handleRemoveFromSeen(artworkID)
     } else {
@@ -198,7 +197,6 @@ class App extends Component {
   sortByYear = (a, b) => {
     const yearA = this.parseYear(a)
     const yearB = this.parseYear(b)
-    console.log(yearA)
     if (yearA < yearB) {
       return -1
     } else if (yearA > yearB) {

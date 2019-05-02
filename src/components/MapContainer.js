@@ -49,7 +49,8 @@ export class MapContainer extends Component {
         >
         {this.props.artworks.map(artwork => {
           return <Marker onClick={this.onMarkerClick}
-                         name={artwork.title}
+                         name={`${artwork.title} — ${artwork.artist}`}
+                         title={artwork.title}
                          position={{lat: artwork.lat , lng: artwork.lng }}/>
         })}
         <InfoWindow
