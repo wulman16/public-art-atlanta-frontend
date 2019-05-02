@@ -12,7 +12,7 @@ class Login extends Component {
         <Fragment>
           <h1 className="login-site-name">Public Art Atlanta</h1>
           <div className="login-container">
-            <div className="error-message"></div>
+            <div className="login-error-message"></div>
             <LoginForm handleLogin={this.props.handleLogin}/>
             <SignupForm handleSignup={this.props.handleSignup}/>
           </div>

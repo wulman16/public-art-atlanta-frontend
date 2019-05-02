@@ -57,7 +57,7 @@ class App extends Component {
           seen: data[0].user_artworks.map(ua => ua.artwork_id)
         }
       })} else {
-        document.querySelector('.error-message').textContent = `Invalid login credentials!`
+        document.querySelector('.login-error-message').textContent = `Invalid login credentials!`
     }
   }
 
