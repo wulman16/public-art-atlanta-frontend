@@ -14,6 +14,14 @@ class Header extends Component {
     this.props.openNew()
   }
 
+  handleNumSeen = (seen) => {
+    if (seen) {
+      return seen.length
+    } else {
+      return 0
+    }
+  }
+
   render() {
     return(
       <Fragment>
@@ -23,7 +31,7 @@ class Header extends Component {
         </div>
         <Profile userId={this.props.userId}
                  userName={this.props.userName}
-                 numSeen={this.props.seen.length}
+                 numSeen={this.handleNumSeen(this.props.seen)}
                  numArtworks={this.props.artworks.length}/>
         <button onClick={this.handleClick}>New Artwork</button>
     </Fragment>

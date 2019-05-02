@@ -81,7 +81,8 @@ class App extends Component {
   }
 
   handleSeen = artworkID => {
-    if (this.state.user.seen.includes(artworkID)) {
+    if (this.state.user.seen &&
+      this.state.user.seen.includes(artworkID)) {
       this.handleRemoveFromSeen(artworkID)
     } else {
       this.handleAddToSeen(artworkID)
@@ -100,13 +101,27 @@ class App extends Component {
         artwork_id: artworkID
       })
     }).then(response => response.json())
-      .then(data => this.setState({
+      .then(data => this.handleEmptySeen(data))
+  }
+
+  handleEmptySeen = data => {
+    if (this.state.user.seen) {
+      this.setState({
         user: {
           ...this.state.user,
-          seen: this.state.user.seen.concat(data.artwork_id),
+          seen: this.state.user.seen.concat([data.artwork_id]),
           userArtworks: this.state.user.userArtworks.concat(data)
         }
-      }))
+      })
+    } else {
+      this.setState({
+        user: {
+          ...this.state.user,
+          seen: [data.artwork_id],
+          userArtworks: [data]
+        }
+      })
+    }
   }
 
   handleRemoveFromSeen = artworkID => {

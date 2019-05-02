@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 class SortDialog extends Component {
 
   state = {
-    sortValue: `nearest`,
+    sortValue: ``,
     filterValue: `all`
   }
 
@@ -36,6 +36,7 @@ class SortDialog extends Component {
           <label>
             Sort Artworks:
             <select value={this.state.sortValue} onChange={this.handleSortChange}>
+              <option value="" disabled></option>
               <option value="nearest">Nearest</option>
               <option value="title">Title</option>
               <option value="artist">Artist</option>
