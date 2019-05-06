@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import { Redirect } from 'react-router'
+// import { Redirect } from 'react-router'
 import Header from './Header'
 import BodyContainer from './BodyContainer'
 import Details from './Details'
@@ -45,8 +45,6 @@ class Index extends Component {
   render() {
     return(
       <Fragment>
-        {/* TODO: eventually handle presence of token instead of presence of user in state */}
-        {!this.props.userId ? <Redirect push to="/login" /> : null}
         <h1 className="site-name">Public Art Atlanta</h1>
         <Details show={this.state.detailsOpen}
                  onClose={this.closeDetails}
@@ -61,7 +59,8 @@ class Index extends Component {
                 userName={this.props.userName}
                 seen={this.props.seen}
                 artworks={this.props.artworks}
-                openNew={this.openNew} />
+                openNew={this.openNew}
+                handleLogout={this.props.handleLogout} />
         <BodyContainer seen={this.props.seen}
                        artworks={this.props.artworks}
                        handleSort={this.props.handleSort}

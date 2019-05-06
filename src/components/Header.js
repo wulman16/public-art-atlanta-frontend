@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react'
+import { Link } from 'react-router-dom'
 import MapContainer from './MapContainer'
 import Profile from './Profile'
 
@@ -22,6 +23,11 @@ class Header extends Component {
     }
   }
 
+  handleLogout = () => {
+    localStorage.clear()
+    this.props.history.push("/login")
+  }
+
   render() {
     return(
       <Fragment>
@@ -34,6 +40,7 @@ class Header extends Component {
                  numSeen={this.handleNumSeen(this.props.seen)}
                  numArtworks={this.props.artworks.length}/>
         <button onClick={this.handleClick}>New Artwork</button>
+        <Link to="/login" replace onClick={this.props.handleLogout}>Logout</Link>
     </Fragment>
     )
   }

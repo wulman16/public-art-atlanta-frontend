@@ -1,24 +1,36 @@
 import React, { Component } from 'react';
 import './App.css';
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom'
 import Login from './components/Login'
 import Index from './components/Index'
+import { createHashHistory } from 'history'
+
+export const history = createHashHistory()
+
+const initialState = {
+  user: {
+    id: null,
+    name: null,
+    userArtworks: [],
+    seen: []
+  },
+  artworks: [],
+  currentLocation: {
+    lat: null,
+    lng: null
+  },
+  filter: `all`
+}
 
 class App extends Component {
   
-  state = {
-    user: {
-      id: null,
-      name: null,
-      userArtworks: [],
-      seen: []
-    },
-    artworks: [],
-    currentLocation: {
-      lat: null,
-      lng: null
-    },
-    filter: `all`
+  constructor(props) {
+    super(props)
+    this.state = initialState;
+  }
+
+  reset() {
+    this.setState(initialState);
   }
 
   componentDidMount() {
@@ -41,27 +53,38 @@ class App extends Component {
     }
   }
 
-  handleLogin = name => {
-    fetch(`http://localhost:3000/users/${name}`)
+  handleLogin = (name, password) => {
+    fetch(`http://localhost:3000/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({ user: {name: name, password: password} })
+    })
       .then(response => response.json())
       .then(data => this.lookupLogin(data))
   }
 
   lookupLogin = data => {
-    if (data.length > 0) {
+    if (data.user) {
+      localStorage.setItem(`name`, data.user.name)
+      localStorage.setItem(`userId`, data.user.id)
+      localStorage.setItem(`token`, data.jwt)
       this.setState({
         user: {
-          id: data[0].id,
-          name: data[0].name,
-          userArtworks: data[0].user_artworks,
-          seen: data[0].user_artworks.map(ua => ua.artwork_id)
+          ...this.state.user,
+          userArtworks: this.state.user.userArtworks.concat(data.user.user_artworks),
+          seen: this.state.user.seen.concat(data.user.user_artworks.map(ua => ua.artwork_id))
         }
-      })} else {
+      })
+      history.push("/index")
+    } else {
         document.querySelector('.login-error-message').textContent = `Invalid login credentials!`
     }
   }
 
-  handleSignup = userName => {
+  handleSignup = (userName, password) => {
     fetch(`http://localhost:3000/users`, {
       method: 'POST',
       headers: {
@@ -69,15 +92,22 @@ class App extends Component {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        name: userName
+        name: userName,
+        password: password
       })
     }).then(response => response.json())
-      .then(data => this.setState({
-        user: {
-          id: data.id,
-          name: data.name
-        }
-      }))
+      .then(data => {
+      localStorage.setItem(`name`, data.user.name)
+      localStorage.setItem(`userId`, data.user.id)
+      localStorage.setItem(`token`, data.jwt)
+      history.push("/index")
+      })
+  }
+
+  handleLogout = () => {
+    this.reset()
+    localStorage.clear()
+    this.props.history.push("/login")
   }
 
   handleSeen = artworkID => {
@@ -97,7 +127,7 @@ class App extends Component {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        user_id: this.state.user.id,
+        user_id: localStorage.userId,
         artwork_id: artworkID
       })
     }).then(response => response.json())
@@ -105,6 +135,7 @@ class App extends Component {
   }
 
   handleEmptySeen = data => {
+    console.log(data)
     if (this.state.user.seen) {
       this.setState({
         user: {
@@ -137,7 +168,7 @@ class App extends Component {
           return a !== artworkID
         }),
         userArtworks: this.state.user.userArtworks.filter(ua => {
-          return ua.id !== userArtworkID
+          return ua.artwork_id !== artworkID
         })
       }
     }))
@@ -304,20 +335,30 @@ class App extends Component {
     }
     return (
       <Router>
+      <Switch>
         <Route exact path="/login"
-               render={props => (<Login {...props} userId={this.state.user.id}
+               render={props => 
+                localStorage.getItem(`token`) ? (
+                  <Redirect to="/" {...props} />
+                ) : (<Login {...props} userId={this.state.user.id}
                                                    userName={this.state.user.name}
                                                    handleLogin={this.handleLogin}
                                                    handleSignup={this.handleSignup} />)} />
         <Route exact path="/(index|)"
-               render={props => (<Index {...props} userId={this.state.user.id}
+               render={props => 
+                localStorage.getItem(`token`) ? (<Index {...props} userId={this.state.user.id}
                                                    userName={this.state.user.name}
                                                    seen={this.state.user.seen}
                                                    artworks={desiredArtworks}
                                                    handleSort={this.handleSort}
                                                    handleFilter={this.handleFilter}
                                                    handleSeen={this.handleSeen}
-                                                   handleArtworkSubmit={this.handleArtworkSubmit} />)} />
+                                                   handleArtworkSubmit={this.handleArtworkSubmit}
+                                                   handleLogout={this.handleLogout} />)
+                : (
+                  <Redirect to="/login" {...props} />
+                )} />
+      </Switch>
       </Router>
     )
   }
