@@ -19,7 +19,8 @@ const initialState = {
     lat: null,
     lng: null
   },
-  filter: `all`
+  filter: `all`,
+  seenFilter: `all`
 }
 
 class App extends Component {
@@ -290,6 +291,12 @@ class App extends Component {
     })
   }
 
+  handleSeenFilter = option => {
+    this.setState({
+      seenFilter: option
+    })
+  }
+
   handleArtworkSubmit = artwork => {
     fetch(`http://localhost:3000/artworks`, {
       method: 'POST',
@@ -305,14 +312,32 @@ class App extends Component {
   }
 
   render() {
-    // handle filtering by medium
+    // handle filtering by medium and seen
     let desiredArtworks
-    if (this.state.filter === `all`) {
+    if (this.state.filter === `all` && this.state.seenFilter === `all`) {
       desiredArtworks = this.state.artworks
-    } else {
+    } else if (this.state.seenFilter === `all`) {
       desiredArtworks = this.state.artworks.filter(artwork => {
         return artwork.medium === this.state.filter
       })
+    } else if (this.state.filter === `all`) {
+      desiredArtworks = this.state.seenFilter === `seen`
+        ? this.state.artworks.filter(artwork => {
+          return this.state.user.seen.includes(artwork.id)
+        })
+        : this.state.artworks.filter(artwork => {
+          return !this.state.user.seen.includes(artwork.id)
+        })
+    } else {
+      desiredArtworks = (this.state.seenFilter === `seen`
+        ? this.state.artworks.filter(artwork => {
+          return this.state.user.seen.includes(artwork.id)
+        })
+        : this.state.artworks.filter(artwork => {
+          return !this.state.user.seen.includes(artwork.id)
+        })).filter(artwork => {
+          return artwork.medium === this.state.filter
+        })
     }
     return (
       <Router>
@@ -333,6 +358,7 @@ class App extends Component {
                                                    artworks={desiredArtworks}
                                                    handleSort={this.handleSort}
                                                    handleFilter={this.handleFilter}
+                                                   handleSeenFilter={this.handleSeenFilter}
                                                    handleSeen={this.handleSeen}
                                                    handleArtworkSubmit={this.handleArtworkSubmit}
                                                    handleLogout={this.handleLogout} />)

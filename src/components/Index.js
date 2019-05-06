@@ -65,6 +65,7 @@ class Index extends Component {
                        artworks={this.props.artworks}
                        handleSort={this.props.handleSort}
                        handleFilter={this.props.handleFilter}
+                       handleSeenFilter={this.props.handleSeenFilter}
                        openDetails={this.openDetails} />
       </Fragment>
     )

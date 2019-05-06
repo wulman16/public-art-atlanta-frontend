@@ -4,7 +4,8 @@ class SortDialog extends Component {
 
   state = {
     sortValue: ``,
-    filterValue: `all`
+    filterValue: `all`,
+    seenValue: `all`
   }
 
   handleSortChange = (e) => {
@@ -27,6 +28,17 @@ class SortDialog extends Component {
   handleFilterSubmit = (e) => {
     e.preventDefault()
     this.props.handleFilter(this.state.filterValue)
+  }
+
+  handleSeenChange = (e) => {
+    this.setState({
+      seenValue: e.target.value
+    })
+  }
+
+  handleSeenSubmit = (e) => {
+    e.preventDefault()
+    this.props.handleSeenFilter(this.state.seenValue)
   }
 
   render() {
@@ -59,6 +71,17 @@ class SortDialog extends Component {
               <option value="relief">Relief</option>
               <option value="painting">Painting</option>
               <option value="photography">Photography</option>
+            </select>
+          </label>
+          <input type="submit" value="Submit"></input>
+        </form>
+        <form onSubmit={this.handleSeenSubmit}>
+          <label>
+            Filter Artworks by Seen:
+            <select value={this.state.seenValue} onChange={this.handleSeenChange}>
+              <option value="all">All</option>
+              <option value="seen">Seen</option>
+              <option value="unseen">Unseen</option>
             </select>
           </label>
           <input type="submit" value="Submit"></input>
