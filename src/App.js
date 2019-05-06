@@ -304,25 +304,6 @@ class App extends Component {
       }))
   }
 
-  // handleSignup = userName => {
-  //   fetch(`http://localhost:3000/users`, {
-  //     method: 'POST',
-  //     headers: {
-  //       'Accept': 'application/json',
-  //       'Content-Type': 'application/json'
-  //     },
-  //     body: JSON.stringify({
-  //       name: userName
-  //     })
-  //   }).then(response => response.json())
-  //     .then(data => this.setState({
-  //       user: {
-  //         id: data.id,
-  //         name: data.name
-  //       }
-  //     }))
-  // }
-
   render() {
     // handle filtering by medium
     let desiredArtworks
