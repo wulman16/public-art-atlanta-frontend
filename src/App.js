@@ -114,7 +114,7 @@ class App extends Component {
   handleLogout = () => {
     this.reset()
     localStorage.clear()
-    this.props.history.push("/login")
+    // this.props.history.push("/login")
   }
 
   handleSeen = artworkID => {

@@ -23,11 +23,6 @@ class Header extends Component {
     }
   }
 
-  handleLogout = () => {
-    localStorage.clear()
-    this.props.history.push("/login")
-  }
-
   render() {
     return(
       <Fragment>
