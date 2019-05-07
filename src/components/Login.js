@@ -14,6 +14,7 @@ class Login extends Component {
           <div className="login-container">
             <div className="login-error-message"></div>
             <LoginForm handleLogin={this.props.handleLogin}/>
+            <div className="signup-error-message"></div>
             <SignupForm handleSignup={this.props.handleSignup}/>
           </div>
         </Fragment>

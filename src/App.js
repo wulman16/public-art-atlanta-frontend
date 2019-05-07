@@ -68,6 +68,7 @@ class App extends Component {
   }
 
   lookupLogin = data => {
+    console.log(data)
     if (data.user) {
       localStorage.setItem(`name`, data.user.name)
       localStorage.setItem(`userId`, data.user.id)
@@ -98,10 +99,15 @@ class App extends Component {
       })
     }).then(response => response.json())
       .then(data => {
-      localStorage.setItem(`name`, data.user.name)
-      localStorage.setItem(`userId`, data.user.id)
-      localStorage.setItem(`token`, data.jwt)
-      history.push("/index")
+        console.log(data)
+        if (data.errors) {
+          document.querySelector('.signup-error-message').textContent = data.errors + `!`
+        } else {
+          localStorage.setItem(`name`, data.user.name)
+          localStorage.setItem(`userId`, data.user.id)
+          localStorage.setItem(`token`, data.jwt)
+          history.push("/index")
+        }
       })
   }
 
