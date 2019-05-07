@@ -34,7 +34,7 @@ class App extends Component {
     this.setState(initialState);
   }
 
-  componentDidMount() {
+  componentWillMount() {
     fetch(`http://localhost:3000/artworks`)
       .then(response => response.json())
       .then(data => this.setState({
@@ -68,14 +68,14 @@ class App extends Component {
   }
 
   lookupLogin = data => {
-    console.log(data)
     if (data.user) {
       localStorage.setItem(`name`, data.user.name)
       localStorage.setItem(`userId`, data.user.id)
       localStorage.setItem(`token`, data.jwt)
       this.setState({
         user: {
-          ...this.state.user,
+          id: data.user.id,
+          name: data.user.name,
           userArtworks: this.state.user.userArtworks.concat(data.user.user_artworks),
           seen: this.state.user.seen.concat(data.user.user_artworks.map(ua => ua.artwork_id))
         }
@@ -114,7 +114,7 @@ class App extends Component {
   handleLogout = () => {
     this.reset()
     localStorage.clear()
-    // this.props.history.push("/login")
+    this.props.history.push("/login")
   }
 
   handleSeen = artworkID => {
@@ -358,8 +358,8 @@ class App extends Component {
                                                    handleSignup={this.handleSignup} />)} />
         <Route exact path="/(index|)"
                render={props => 
-                localStorage.getItem(`token`) ? (<Index {...props} userId={this.state.user.id}
-                                                   userName={this.state.user.name}
+                localStorage.getItem(`token`) ? (<Index {...props} userId={localStorage.getItem(`userId`)}
+                                                   userName={localStorage.getItem(`name`)}
                                                    seen={this.state.user.seen}
                                                    artworks={desiredArtworks}
                                                    handleSort={this.handleSort}
