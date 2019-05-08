@@ -5,12 +5,15 @@ import BodyContainer from './BodyContainer'
 import Details from './Details'
 import NewArtworkForm from './NewArtworkForm'
 
+ReactModal.setAppElement('#root')
+
 class Index extends Component {
 
   state = {
     showDetails: false,
     detailsOpen: false,
     newOpen: false,
+    showSort: false,
     id: null,
     profile: ``,
     title: ``,
@@ -21,6 +24,12 @@ class Index extends Component {
     lng: null,
     source: ``,
     owner: ``
+  }
+
+  toggleSort = () => {
+    this.setState({
+      showSort: !this.state.showSort
+    })
   }
 
   // toggleModal = () => {
@@ -110,13 +119,17 @@ class Index extends Component {
                 seen={this.props.seen}
                 artworks={this.props.artworks}
                 openNew={this.openNew}
-                handleLogout={this.props.handleLogout} />
+                handleLogout={this.props.handleLogout}
+                toggleSort={this.toggleSort} />
+        <div className="separator"></div>
         <BodyContainer seen={this.props.seen}
                        artworks={this.props.artworks}
                        handleSort={this.props.handleSort}
                        handleFilter={this.props.handleFilter}
                        handleSeenFilter={this.props.handleSeenFilter}
-                       openDetails={this.openDetails} />
+                       openDetails={this.openDetails}
+                       toggleSort={this.toggleSort}
+                       showSort={this.state.showSort} />
       </Fragment>
     )
   }

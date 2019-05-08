@@ -1,13 +1,13 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import MapContainer from './MapContainer'
 import Profile from './Profile'
 
-const divStyle = {
-  position: 'relative',
-  height: `75vh`,
-  // backgroundColor: `grey`
-}
+// const divStyle = {
+//   position: 'relative',
+//   height: `75vh`,
+//   // backgroundColor: `grey`
+// }
 
 class Header extends Component {
 
@@ -23,21 +23,30 @@ class Header extends Component {
     }
   }
 
+  calculateZoom = () => {
+    console.log(window.innerWidth)
+    console.log(Math.floor(window.innerWidth * 0.01))
+    return Math.floor(window.innerWidth * 0.01)
+  }
+
   render() {
     return(
-      <Fragment>
-        <div style={divStyle}>
+      <div className="header-container">
+        <div className="header-map-container">
           <MapContainer seen={this.props.seen}
               artworks={this.props.artworks}
-              zoom={11} />
+              zoom={this.calculateZoom()} />
         </div>
-        <Profile userId={this.props.userId}
-                 userName={this.props.userName}
-                 numSeen={this.handleNumSeen(this.props.seen)}
-                 numArtworks={this.props.artworks.length}/>
-        <button onClick={this.handleClick}>New Artwork</button>
-        <Link to="/login" replace onClick={this.props.handleLogout}>Logout</Link>
-    </Fragment>
+        <div className="profile-container">
+          <Profile userId={this.props.userId}
+                  userName={this.props.userName}
+                  numSeen={this.handleNumSeen(this.props.seen)}
+                  numArtworks={this.props.artworks.length}/>
+          <button onClick={this.handleClick}>New Artwork</button>
+          <button onClick={this.props.toggleSort}>Sort and Filter Artworks</button>
+          <Link to="/login" replace onClick={this.props.handleLogout}>Logout</Link>
+        </div>
+    </div>
     )
   }
 }

@@ -15,7 +15,7 @@ class CardContainer extends Component {
 
   render() {
     return(
-      <div>
+      <div className="card-container">
         {this.props.artworks.map((artwork, i) => {
           return <Card key={i}
                        artworkTitle={artwork.title}
