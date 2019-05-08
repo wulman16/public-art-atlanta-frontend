@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-// import { Redirect } from 'react-router'
+import ReactModal from 'react-modal'
 import Header from './Header'
 import BodyContainer from './BodyContainer'
 import Details from './Details'
@@ -8,6 +8,7 @@ import NewArtworkForm from './NewArtworkForm'
 class Index extends Component {
 
   state = {
+    showDetails: false,
     detailsOpen: false,
     newOpen: false,
     id: null,
@@ -22,11 +23,17 @@ class Index extends Component {
     owner: ``
   }
 
+  // toggleModal = () => {
+  //   this.setState({
+  //     showModal: !this.state.showModal
+  //   })
+  // }
+
   openDetails = (profile, artworkID, artworkTitle, artworkArtist,
     artworkYear, artworkImage, artworkLat, artworkLng, artworkSource,
     artworkOwner) => {
     this.setState({
-      detailsOpen: true,
+      showDetails: true,
       id: artworkID,
       profile: profile,
       title: artworkTitle,
@@ -42,7 +49,7 @@ class Index extends Component {
 
   closeDetails = () => {
     this.setState({
-      detailsOpen: false,
+      showDetails: false,
       id: null,
       profile: ``
     })
@@ -63,6 +70,28 @@ class Index extends Component {
   render() {
     return(
       <Fragment>
+        <div>
+        {/* <button onClick={this.toggleModal}>Trigger Modal</button> */}
+        <ReactModal 
+           isOpen={this.state.showDetails}
+           contentLabel="Minimal Modal Example">
+           <Details
+                 isOpen={this.state.showDetails} 
+                 profile={this.state.profile}
+                 id={this.state.id}
+                 title={this.state.title}
+                 artist={this.state.artist}
+                 year={this.state.year}
+                 image={this.state.image}
+                 lat={this.state.lat}
+                 lng={this.state.lng}
+                 source={this.state.source}
+                 owner={this.state.owner}
+                 seen={this.props.seen}
+                 handleSeen={this.props.handleSeen} />
+          <button onClick={this.closeDetails}>Close Modal</button>
+        </ReactModal>
+      </div>
         <div className="site-name-container">
           <h1 className="site-name">Public Art Atlanta</h1>
         </div>
