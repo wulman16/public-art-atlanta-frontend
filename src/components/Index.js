@@ -80,9 +80,12 @@ class Index extends Component {
     return(
       <Fragment>
         <div>
-          <ReactModal 
+          <ReactModal
+            portalClassName="modal"
             isOpen={this.state.showDetails}
-            contentLabel={this.state.title}>
+            contentLabel={this.state.title}
+            shouldCloseOnOverlayClick={true}
+            onRequestClose={this.closeDetails}>
             <Details
                   isOpen={this.state.showDetails} 
                   profile={this.state.profile}
@@ -97,17 +100,20 @@ class Index extends Component {
                   owner={this.state.owner}
                   seen={this.props.seen}
                   handleSeen={this.props.handleSeen} />
-            <button onClick={this.closeDetails}>Close Modal</button>
+            <button onClick={this.closeDetails} className="button">Close</button>
           </ReactModal>
         </div>
         <div>
           <ReactModal
+            portalClassName="modal" 
             isOpen={this.state.newOpen}
-            contentLabel="New Artwork Form">
+            contentLabel="New Artwork Form"
+            shouldCloseOnOverlayClick={true}
+            onRequestClose={this.closeNew}>
             <NewArtworkForm
               isOpen={this.state.newOpen}
               handleArtworkSubmit={this.props.handleArtworkSubmit} />
-            <button onClick={this.closeNew}>Close Modal</button>
+            <button onClick={this.closeNew} className="button">Close</button>
           </ReactModal>
         </div>
 

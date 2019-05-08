@@ -22,9 +22,10 @@ class Card extends Component {
       <div className="card">
         {/* TODO: handle null image */}
         <img className="card-image"onClick={this.handleClick} src={this.props.artworkImage} alt={this.props.artworkTitle}></img>
-        {/* <div onClick={this.handleClick}>{this.props.artworkTitle}</div>
-        <div>{this.props.artworkArtist}</div>
-        <div>{this.props.artworkYear}</div> */}
+        <div className="card-info">
+          <div className="artwork-title">{this.props.artworkTitle}</div>
+          <div>{this.props.artworkArtist}</div>
+        </div>
         {/* {this.props.seen ? `true` : `false`} */}
       </div>
     )

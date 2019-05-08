@@ -128,7 +128,7 @@ class NewArtworkForm extends React.Component {
                     value={this.state.lng} onChange={this.handleChange} ></input>
             <input type="text" placeholder="Source URL" name="source"
                     value={this.state.source} onChange={this.handleChange} ></input>
-            <input type="submit" value="Submit" />
+            <input type="submit" value="Submit" className="button" />
           </form>
 
           {/* <div className="footer">

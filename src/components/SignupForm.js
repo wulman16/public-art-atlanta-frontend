@@ -13,7 +13,7 @@ class SignupForm extends Component {
         <label>Signup</label>
         <input type="text" placeholder="Username" name="name"></input>
         <input type="password" placeholder="Password" name="password"></input>
-        <input type="submit" />
+        <input type="submit" className="button" />
       </form>
     )
   }

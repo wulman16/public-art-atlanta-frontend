@@ -1,3 +1,40 @@
+* {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.site-name {
+  font-weight: 900;
+  font-size: 10vh;
+}
+
+div {
+  font-size: 3vh;
+}
+
+.artwork-title {
+  font-style: italic;
+}
+
+.username, .seen-ratio, .new-artwork-button, .sort-button, .logout-button {
+  margin: 1vh;
+}
+
+.button {
+  background-color: black;
+  color: lightgray;
+  text-align: center;
+  /* border: 1px solid black; */
+  border-radius: 8px;
+  transition-duration: 0.4s;
+  font-size: 2vh;
+}
+
+.button:hover {
+  background-color: lightgray;
+  color: black;
+  cursor: pointer;
+}
+
 .outer-login-container {
   display: table;
   position: absolute;
@@ -5,6 +42,7 @@
   left: 0;
   height: 100%;
   width: 100%;
+  background: url(https://www.investatlanta.com/assets/developers_newmarkettaxcredits_mantle_940x360_V1rQmP8.jpg)
 }
 
 .middle-login-container {
@@ -16,12 +54,28 @@
   margin-left: auto;
   margin-right: auto;
   width: 80%;
-  border: 1px solid black;
+  border: 5px solid black;
+  border-radius: 8px;
+  background: white;
+}
+
+.login-form-container {
+  margin: 5%;
+  text-align: center;
+}
+
+input {
+  margin: 5px;
+}
+
+.separator {
+  margin: 5px;
 }
 
 .site-name-container {
   text-align: center;
   height: 15vh;
+  margin-bottom: 5%;
 }
 
 .header-container {
@@ -32,6 +86,7 @@
 
 .header-map-container {
   width: 40%;
+  max-width: 40%;
   height: 0;
   padding-bottom: 40%;
   float: left;
@@ -50,17 +105,16 @@
   height: 100%;
   margin-right: 20%;
   padding: 5%;
-}
-
-.separator {
-  position: absolute;
+  /* position: absolute; */
 }
 
 .body-container {
   /* display: inline-block; */
   margin: auto;
-  margin-top: 5%;
+  margin-top: 15%;
+  margin-left: 6%;
   width: 80%;
+  position: absolute;
 }
 
 .card-container {
@@ -71,18 +125,101 @@
   /* padding-left: 3%;
   padding-right: 5%; */
   display: grid;
-  grid-template-columns: 33% 33% 33%;
-  /* grid-template-rows: 50vh; */
-  /* grid-gap: 15px; */
+  grid-template-columns: repeat(3, 3fr);
+  grid-auto-rows: 50vh;
+  grid-gap: 15px;
 }
 
 .card {
-  height: 80%;
-  width: 80%;
+  /* height: 80%;
+  width: 80%; */
+  /* max-height: 25vh; */
+}
+
+.card-info {
+  position: relative;
+  opacity: 0;
+  color: lightgray;
+  background: #000000;
+  transition: opacity 0.4s;
+  /* padding: 2px 0px; */
+  object-fit: cover;
+  display: block;
+  bottom: 50%;
+  text-align: right;
+  width: 103%;
+  /* height: 100%; */
+}
+
+.card:hover .card-info {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.card:hover .card-image {
+  /* opacity: 0.3; */
+  filter: grayscale(100%);
+  cursor: pointer;
 }
 
 .card-image {
   width: 100%;
   height: 100%;
+  transition-duration: 0.4s;
   object-fit: cover;
+  border: 5px solid black;
+  border-radius: 8px;
+}
+
+.modal__content {
+  border: 5px solid black;
+  border-radius: 8px;
+}
+
+.ReactModal__Content {
+  position: absolute;
+  left: 2.5rem;
+  right: 2.5rem;
+  top: 2.5rem;
+  bottom: 2.5rem;
+  background-color: #fff;
+  box-shadow: 0 0 10px 0 rgba(0,0,97,0.5);
+  overflow: auto;
+  border-radius: 8px;
+  outline: none;
+  width: 50%;
+  margin: auto;
+  height: auto;
+}
+
+.ReactModal__Body--open {
+  overflow: hidden;
+}
+
+.details-map-container {
+  width: 50%;
+  height: 0;
+  padding-bottom: 40%;
+  float: left;
+  position: relative;
+}
+
+.details-tombstone {
+  text-align: center;
+}
+
+.details-image {
+  max-width: 100%;
+  margin-top: 5%;
+}
+
+.details-source {
+  color: gray;
+  font-size: 2vh;
+  margin: 5%;
+}
+
+.details-source a {
+  color: gray;
+  font-size: 2.5vh;
 }

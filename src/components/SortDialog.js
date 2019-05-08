@@ -56,7 +56,7 @@ class SortDialog extends Component {
               <option value="newest">Newest</option>
             </select>
           </label>
-          <input type="submit" value="Submit"></input>
+          <input type="submit" value="Submit" className="button"></input>
         </form>
         <form onSubmit={this.handleFilterSubmit}>
           <label>
@@ -73,7 +73,7 @@ class SortDialog extends Component {
               <option value="photography">Photography</option>
             </select>
           </label>
-          <input type="submit" value="Submit"></input>
+          <input type="submit" value="Submit" className="button"></input>
         </form>
         <form onSubmit={this.handleSeenSubmit}>
           <label>
@@ -84,7 +84,7 @@ class SortDialog extends Component {
               <option value="unseen">Unseen</option>
             </select>
           </label>
-          <input type="submit" value="Submit"></input>
+          <input type="submit" value="Submit" className="button"></input>
         </form>
       </div>
     )

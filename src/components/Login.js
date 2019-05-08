@@ -18,6 +18,7 @@ class Login extends Component {
               <div className="login-form-container">
                 <div className="login-error-message"></div>
                 <LoginForm handleLogin={this.props.handleLogin}/>
+                <div className="separator">— or —</div>
                 <div className="signup-error-message"></div>
                 <SignupForm handleSignup={this.props.handleSignup}/>
               </div>
