@@ -71,27 +71,37 @@ class Index extends Component {
     return(
       <Fragment>
         <div>
-        {/* <button onClick={this.toggleModal}>Trigger Modal</button> */}
-        <ReactModal 
-           isOpen={this.state.showDetails}
-           contentLabel="Minimal Modal Example">
-           <Details
-                 isOpen={this.state.showDetails} 
-                 profile={this.state.profile}
-                 id={this.state.id}
-                 title={this.state.title}
-                 artist={this.state.artist}
-                 year={this.state.year}
-                 image={this.state.image}
-                 lat={this.state.lat}
-                 lng={this.state.lng}
-                 source={this.state.source}
-                 owner={this.state.owner}
-                 seen={this.props.seen}
-                 handleSeen={this.props.handleSeen} />
-          <button onClick={this.closeDetails}>Close Modal</button>
-        </ReactModal>
-      </div>
+          <ReactModal 
+            isOpen={this.state.showDetails}
+            contentLabel={this.state.title}>
+            <Details
+                  isOpen={this.state.showDetails} 
+                  profile={this.state.profile}
+                  id={this.state.id}
+                  title={this.state.title}
+                  artist={this.state.artist}
+                  year={this.state.year}
+                  image={this.state.image}
+                  lat={this.state.lat}
+                  lng={this.state.lng}
+                  source={this.state.source}
+                  owner={this.state.owner}
+                  seen={this.props.seen}
+                  handleSeen={this.props.handleSeen} />
+            <button onClick={this.closeDetails}>Close Modal</button>
+          </ReactModal>
+        </div>
+        <div>
+          <ReactModal
+            isOpen={this.state.newOpen}
+            contentLabel="New Artwork Form">
+            <NewArtworkForm
+              isOpen={this.state.newOpen}
+              handleArtworkSubmit={this.props.handleArtworkSubmit} />
+            <button onClick={this.closeNew}>Close Modal</button>
+          </ReactModal>
+        </div>
+
         <div className="site-name-container">
           <h1 className="site-name">Public Art Atlanta</h1>
         </div>
