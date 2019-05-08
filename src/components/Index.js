@@ -63,7 +63,9 @@ class Index extends Component {
   render() {
     return(
       <Fragment>
-        <h1 className="site-name">Public Art Atlanta</h1>
+        <div className="site-name-container">
+          <h1 className="site-name">Public Art Atlanta</h1>
+        </div>
         <Details show={this.state.detailsOpen}
                  onClose={this.closeDetails}
                  profile={this.state.profile}
