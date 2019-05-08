@@ -40,7 +40,7 @@ export class MapContainer extends Component {
     return(
       <Map 
         google={this.props.google}
-        zoom={11}
+        zoom={this.props.zoom}
         style={mapStyles}
         initialCenter={{
           lat: this.avgValue(this.props.artworks, `lat`),

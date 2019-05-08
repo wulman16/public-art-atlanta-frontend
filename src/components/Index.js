@@ -11,14 +11,32 @@ class Index extends Component {
     detailsOpen: false,
     newOpen: false,
     id: null,
-    profile: ``
+    profile: ``,
+    title: ``,
+    artist: ``,
+    year: null,
+    image: ``,
+    lat: null,
+    lng: null,
+    source: ``,
+    owner: ``
   }
 
-  openDetails = (profile, artworkID) => {
+  openDetails = (profile, artworkID, artworkTitle, artworkArtist,
+    artworkYear, artworkImage, artworkLat, artworkLng, artworkSource,
+    artworkOwner) => {
     this.setState({
       detailsOpen: true,
       id: artworkID,
-      profile: profile
+      profile: profile,
+      title: artworkTitle,
+      artist: artworkArtist,
+      year: artworkYear,
+      image: artworkImage,
+      lat: artworkLat,
+      lng: artworkLng,
+      source: artworkSource,
+      owner: artworkOwner
     })
   }
 
@@ -50,6 +68,14 @@ class Index extends Component {
                  onClose={this.closeDetails}
                  profile={this.state.profile}
                  id={this.state.id}
+                 title={this.state.title}
+                 artist={this.state.artist}
+                 year={this.state.year}
+                 image={this.state.image}
+                 lat={this.state.lat}
+                 lng={this.state.lng}
+                 source={this.state.source}
+                 owner={this.state.owner}
                  seen={this.props.seen}
                  handleSeen={this.props.handleSeen} />
         <NewArtworkForm show={this.state.newOpen}

@@ -1,9 +1,14 @@
 import React from 'react'
+import MapContainer from './MapContainer'
 
 class Details extends React.Component {
   render() {
 
-    // TODO: render a little map inside the details dialog with the marker
+    const mapStyle = {
+      position: 'relative',
+      height: `75vh`,
+      // backgroundColor: `grey`
+    }
 
     // Render nothing if the "show" prop is false
     if(!this.props.show) {
@@ -34,8 +39,26 @@ class Details extends React.Component {
     return (
       <div className="backdrop" style={{backdropStyle}}>
         <div className="modal" style={{modalStyle}}>
-          {this.props.profile}
-
+          <div className="map" style={{mapStyle}}>
+            <MapContainer artworks={[{
+              title: this.props.title,
+              artist: this.props.artist,
+              lat: this.props.lat,
+              lng: this.props.lng
+            }]}
+            zoom={15} />
+          </div>
+          <div>
+            {this.props.title}
+            {this.props.artist}
+            {this.props.year}
+            <img src={this.props.image} alt={this.props.title}></img>
+            {this.props.lat}
+            {this.props.lng}
+            {this.props.profile}
+            {this.props.source}
+            {this.props.owner}
+          </div>
           <div className="footer">
             <button onClick={() => this.props.handleSeen(this.props.id)}>
               {this.props.seen && this.props.seen.includes(this.props.id)

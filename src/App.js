@@ -99,7 +99,6 @@ class App extends Component {
       })
     }).then(response => response.json())
       .then(data => {
-        console.log(data)
         if (data.errors) {
           document.querySelector('.signup-error-message').textContent = data.errors + `!`
         } else {
@@ -142,7 +141,6 @@ class App extends Component {
   }
 
   handleEmptySeen = data => {
-    console.log(data)
     if (this.state.user.seen) {
       this.setState({
         user: {

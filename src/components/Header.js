@@ -28,7 +28,8 @@ class Header extends Component {
       <Fragment>
         <div style={divStyle}>
           <MapContainer seen={this.props.seen}
-              artworks={this.props.artworks}/>
+              artworks={this.props.artworks}
+              zoom={11} />
         </div>
         <Profile userId={this.props.userId}
                  userName={this.props.userName}

@@ -15,7 +15,16 @@ class Card extends Component {
   }
 
   handleClick = () => {
-    this.props.openDetails(this.props.artworkProfile, this.props.artworkID)
+    this.props.openDetails(this.props.artworkProfile, 
+      this.props.artworkID,
+      this.props.artworkTitle,
+      this.props.artworkArtist,
+      this.props.artworkYear,
+      this.props.artworkImage,
+      this.props.artworkLat,
+      this.props.artworkLng,
+      this.props.artworkSource,
+      this.props.artworkOwner)
   }
 
   render() {
