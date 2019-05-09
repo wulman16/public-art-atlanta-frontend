@@ -7,22 +7,11 @@ ReactModal.setAppElement('#root')
 
 class BodyContainer extends Component {
 
-  // state = {
-  //   showSort: false
-  // }
-
-  // toggleSort = () => {
-  //   this.setState({
-  //     showSort: !this.state.showSort
-  //   })
-  // }
-
   render() {
     return(
       <div className="body-container">
         <div>
           <ReactModal
-            portalClassName="modal"
             isOpen={this.props.showSort}
             contentLabel="Sort and Filter Options"
             shouldCloseOnOverlayClick={true}

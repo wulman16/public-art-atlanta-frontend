@@ -105,14 +105,14 @@ class Index extends Component {
         </div>
         <div>
           <ReactModal
-            portalClassName="modal" 
             isOpen={this.state.newOpen}
             contentLabel="New Artwork Form"
             shouldCloseOnOverlayClick={true}
             onRequestClose={this.closeNew}>
             <NewArtworkForm
               isOpen={this.state.newOpen}
-              handleArtworkSubmit={this.props.handleArtworkSubmit} />
+              handleArtworkSubmit={this.props.handleArtworkSubmit}
+              handleClose={this.closeNew} />
             <button onClick={this.closeNew} className="button">Close</button>
           </ReactModal>
         </div>

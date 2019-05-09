@@ -10,22 +10,24 @@ class Details extends React.Component {
 
     return (
       <div>
-        <div className="details-map-container">
-          <MapContainer artworks={[{
-            title: this.props.title,
-            artist: this.props.artist,
-            lat: this.props.lat,
-            lng: this.props.lng
-          }]}
-          zoom={15} />
-        </div>
-        <div className="details-tombstone">
-          <h2 className="artwork-title">{this.props.title}</h2>
-          <div>{this.props.artist}</div>
-          <div>{this.props.year}</div>
+        <div className="details-header">
+          <div className="details-map-container">
+            <MapContainer artworks={[{
+              title: this.props.title,
+              artist: this.props.artist,
+              lat: this.props.lat,
+              lng: this.props.lng
+            }]}
+            zoom={15} />
+          </div>
+          <div className="details-tombstone">
+            <h2 className="artwork-title">{this.props.title}</h2>
+            <div>{this.props.artist}</div>
+            <div>{this.props.year}</div>
+          </div>
         </div>
         <img src={this.props.image} alt={this.props.title} className="details-image"></img>
-        <div>{this.props.profile}</div>
+        <div className="details-profile">{this.props.profile}</div>
         <div className="details-source"> — <a href={this.props.source}>{this.props.owner}</a></div>
         <div className="footer">
           <button className="button" onClick={() => this.props.handleSeen(this.props.id)}>

@@ -19,9 +19,9 @@ class Card extends Component {
 
   render() {
     return(
-      <div className="card">
+      <div className="card" onClick={this.handleClick}>
         {/* TODO: handle null image */}
-        <img className="card-image"onClick={this.handleClick} src={this.props.artworkImage} alt={this.props.artworkTitle}></img>
+        <img className="card-image" src={this.props.artworkImage} alt={this.props.artworkTitle}></img>
         <div className="card-info">
           <div className="artwork-title">{this.props.artworkTitle}</div>
           <div>{this.props.artworkArtist}</div>

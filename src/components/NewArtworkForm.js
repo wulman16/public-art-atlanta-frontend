@@ -38,7 +38,7 @@ class NewArtworkForm extends React.Component {
       }
       this.props.handleArtworkSubmit(artworkObject)
       this.setState(() => this.initialState)
-      this.props.onClose()
+      this.props.handleClose()
     }
   }
 
@@ -98,6 +98,7 @@ class NewArtworkForm extends React.Component {
           <div className="new-artwork-error-message"></div>
           <form onSubmit={this.handleSubmit}>
             <label>New Artwork</label>
+            <br/>
             <input type="text" placeholder="Title" name="title"
                     value={this.state.title} onChange={this.handleChange} ></input>
             <input type="text" placeholder="Artist" name="artist"
@@ -130,12 +131,6 @@ class NewArtworkForm extends React.Component {
                     value={this.state.source} onChange={this.handleChange} ></input>
             <input type="submit" value="Submit" className="button" />
           </form>
-
-          {/* <div className="footer">
-            <button onClick={this.handleClose}>
-              Close
-            </button>
-          </div> */}
         </div>
       </div>
     );
