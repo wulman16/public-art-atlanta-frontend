@@ -32,12 +32,6 @@ class Index extends Component {
     })
   }
 
-  // toggleModal = () => {
-  //   this.setState({
-  //     showModal: !this.state.showModal
-  //   })
-  // }
-
   openDetails = (profile, artworkID, artworkTitle, artworkArtist,
     artworkYear, artworkImage, artworkLat, artworkLng, artworkSource,
     artworkOwner) => {

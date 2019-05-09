@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 
 class Card extends Component {
 
-  // TODO: automatically crop images to fit the square thumbnail dimensions?
-
   handleClick = () => {
     this.props.openDetails(this.props.artworkProfile, 
       this.props.artworkID,
@@ -20,13 +18,12 @@ class Card extends Component {
   render() {
     return(
       <div className="card" onClick={this.handleClick}>
-        {/* TODO: handle null image */}
         <img className="card-image" src={this.props.artworkImage} alt={this.props.artworkTitle}></img>
         <div className="card-info">
           <div className="artwork-title">{this.props.artworkTitle}</div>
           <div>{this.props.artworkArtist}</div>
         </div>
-        {/* {this.props.seen ? `true` : `false`} */}
+        {/* TODO: display card differently based on seen status {this.props.seen ? `true` : `false`} */}
       </div>
     )
   }

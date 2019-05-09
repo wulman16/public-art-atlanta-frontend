@@ -3,12 +3,6 @@ import { Link } from 'react-router-dom'
 import MapContainer from './MapContainer'
 import Profile from './Profile'
 
-// const divStyle = {
-//   position: 'relative',
-//   height: `75vh`,
-//   // backgroundColor: `grey`
-// }
-
 class Header extends Component {
 
   handleClick = () => {
