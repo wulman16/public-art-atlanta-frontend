@@ -18,7 +18,6 @@ class Header extends Component {
   }
 
   render() {
-    const zoom = Math.floor(window.innerWidth * 0.012)
     return(
       <div className="header-container">
         <div className="header-map-container">

@@ -22,7 +22,6 @@ div {
 .button {
   background-color: black;
   color: lightgray;
-  text-align: center;
   border-radius: 8px;
   transition-duration: 0.4s;
   font-size: 2vh;
