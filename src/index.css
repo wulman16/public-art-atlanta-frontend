@@ -66,8 +66,9 @@ div {
   text-align: center;
 }
 
-input {
+input, textarea, select {
   margin: 5px;
+  font-size: 2vh;
 }
 
 .separator {
@@ -181,12 +182,22 @@ input {
   outline: none;
   width: 50%;
   margin: auto;
-  height: 30%;
+  height: 45%;
 }
 
-.modal .ReactModal__Content {
+.details-modal .ReactModal__Content {
   width: 70%;
   height: 70%;
+}
+
+.new-artwork-modal .ReactModal__Content {
+  width: 40%;
+  height: 45%;
+}
+
+.sort-modal .ReactModal__Content {
+  width: 50%;
+  height: 20%;
 }
 
 .ReactModal__Body--open {
@@ -235,4 +246,8 @@ input {
 .details-source a {
   color: gray;
   font-size: 2.5vh;
+}
+
+#close-button {
+  float: right;
 }

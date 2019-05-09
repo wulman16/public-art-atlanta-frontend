@@ -68,19 +68,21 @@ class NewArtworkForm extends React.Component {
 
     return (
       <div className="backdrop">
-        <div className="modal">
+        <div className="artwork-form-modal">
           <div className="new-artwork-error-message"></div>
-          <form onSubmit={this.handleSubmit}>
+          <form className="artwork-form" onSubmit={this.handleSubmit}>
             <label>New Artwork</label>
             <br/>
             <input type="text" placeholder="Title" name="title"
                     value={this.state.title} onChange={this.handleChange} ></input>
             <input type="text" placeholder="Artist" name="artist"
                     value={this.state.artist} onChange={this.handleChange} ></input>
+            <br/>
             <input type="text" placeholder="Year" name="year"
                     value={this.state.year} onChange={this.handleChange} ></input>
             <input type="text" placeholder="Image URL*" name="image"
                     value={this.state.image} onChange={this.handleChange} ></input>
+            <br/>
             <select value={this.state.medium} onChange={this.handleChange}
                     name="medium">
               <option value="" disabled>Medium</option>
@@ -95,14 +97,18 @@ class NewArtworkForm extends React.Component {
             </select>
             <input type="text" placeholder="Owner" name="owner"
                     value={this.state.owner} onChange={this.handleChange} ></input>
+            <br/>
             <textarea placeholder="Profile" name="profile"
                     value={this.state.profile} onChange={this.handleChange} ></textarea>
+            <br/>
             <input type="text" placeholder="Latitude*" name="lat"
                     value={this.state.lat} onChange={this.handleChange} ></input>
             <input type="text" placeholder="Longitude*" name="lng"
                     value={this.state.lng} onChange={this.handleChange} ></input>
+            <br/>
             <input type="text" placeholder="Source URL" name="source"
                     value={this.state.source} onChange={this.handleChange} ></input>
+            <br/>
             <input type="submit" value="Submit" className="button" />
           </form>
         </div>

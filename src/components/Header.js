@@ -24,7 +24,7 @@ class Header extends Component {
         <div className="header-map-container">
           <MapContainer seen={this.props.seen}
               artworks={this.props.artworks}
-              zoom={zoom} />
+              zoom={11} />
         </div>
         <div className="profile-container">
           <Profile userId={this.props.userId}
