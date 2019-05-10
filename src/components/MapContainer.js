@@ -63,7 +63,7 @@ export class MapContainer extends Component {
           onClose={this.onClose}
         >
           <div>
-            <h4>{this.state.selectedPlace.name}</h4>
+            <h4 className="map-label">{this.state.selectedPlace.name}</h4>
           </div>
         </InfoWindow>
       </Map>
