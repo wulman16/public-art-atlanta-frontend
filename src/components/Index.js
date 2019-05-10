@@ -32,6 +32,12 @@ class Index extends Component {
     })
   }
 
+  handleInfoWindowClick = artwork => {
+    this.openDetails(artwork.profile, artwork.id, artwork.title,
+      artwork.artist, artwork.year, artwork.image, artwork.lat,
+      artwork.lng, artwork.source, artwork.owner)
+  }
+
   openDetails = (profile, artworkID, artworkTitle, artworkArtist,
     artworkYear, artworkImage, artworkLat, artworkLng, artworkSource,
     artworkOwner) => {
@@ -120,6 +126,7 @@ class Index extends Component {
                 userName={this.props.userName}
                 seen={this.props.seen}
                 artworks={this.props.artworks}
+                handleInfoWindowClick={this.handleInfoWindowClick}
                 openNew={this.openNew}
                 handleLogout={this.props.handleLogout}
                 toggleSort={this.toggleSort} />

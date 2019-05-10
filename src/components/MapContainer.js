@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import ReactDOM from 'react-dom'
 import { Map, GoogleApiWrapper, InfoWindow, Marker } from 'google-maps-react'
 
 const mapStyles = {
@@ -14,19 +15,26 @@ export class MapContainer extends Component {
   state = {
     showingInfoWindow: false,
     activeMarker: {},
-    selectedPlace: {}
+    selectedPlace: {},
+    selectedArtwork: {}
   }
 
   avgValue = (locations, type) => {
     return locations.reduce((a, b) => a + b[type], 0) / locations.length
   }
 
-  onMarkerClick = (props, marker, e) => {
+  onMarkerClick = (props, marker, e, artwork) => {
     this.setState({
       selectedPlace: props,
       activeMarker: marker,
-      showingInfoWindow: true
+      showingInfoWindow: true,
+      selectedArtwork: artwork
     })
+  }
+
+  onInfoWindowOpen = () => {
+    const content = (<h4 onClick={() => this.props.handleInfoWindowClick(this.state.selectedArtwork)} className="map-label">{this.state.selectedPlace.name}</h4>)
+    ReactDOM.render(React.Children.only(content), document.getElementById(`iwc`))
   }
 
   onClose = () => {
@@ -52,7 +60,7 @@ export class MapContainer extends Component {
         >
         {this.props.artworks.map((artwork, i) => {
           return <Marker key={i}
-                         onClick={this.onMarkerClick}
+                         onClick={(props, marker, e) => this.onMarkerClick(props, marker, e, artwork)}
                          name={`${artwork.title} — ${artwork.artist}`}
                          title={artwork.title}
                          position={{lat: artwork.lat , lng: artwork.lng }}/>
@@ -61,9 +69,10 @@ export class MapContainer extends Component {
           marker={this.state.activeMarker}
           visible={this.state.showingInfoWindow}
           onClose={this.onClose}
+          onOpen={this.onInfoWindowOpen}
         >
-          <div>
-            <h4 className="map-label">{this.state.selectedPlace.name}</h4>
+          <div id="iwc">
+            {/* <h4 className="map-label">{this.state.selectedPlace.name}</h4> */}
           </div>
         </InfoWindow>
       </Map>

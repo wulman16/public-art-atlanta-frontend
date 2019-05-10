@@ -36,6 +36,11 @@ div {
 .map-label {
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   font-size: 2vh;
+  cursor: pointer;
+}
+
+.map-label:hover {
+  color: gray;
 }
 
 .button:hover {
