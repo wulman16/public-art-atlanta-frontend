@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import ReactModal from 'react-modal'
-import SortDialog from './SortDialog'
+import SortContainer from './SortContainer'
 import CardContainer from './CardContainer'
 
 ReactModal.setAppElement('#root')
@@ -11,7 +11,12 @@ class BodyContainer extends Component {
     return(
       <div className="body-container">
         <div>
-          <ReactModal
+        <SortContainer
+              handleSort={this.props.handleSort}
+              handleFilter={this.props.handleFilter}
+              handleSeenFilter={this.props.handleSeenFilter}
+              closeDialog={this.props.toggleSort} />
+          {/* <ReactModal
             portalClassName="sort-modal"
             isOpen={this.props.showSort}
             contentLabel="Sort and Filter Options"
@@ -23,7 +28,7 @@ class BodyContainer extends Component {
               handleFilter={this.props.handleFilter}
               handleSeenFilter={this.props.handleSeenFilter}
               closeDialog={this.props.toggleSort} />
-          </ReactModal>
+          </ReactModal> */}
         </div>
         <CardContainer seen={this.props.seen}
                        artworks={this.props.artworks}

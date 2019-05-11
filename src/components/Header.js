@@ -32,7 +32,7 @@ class Header extends Component {
                   numSeen={this.handleNumSeen(this.props.seen)}
                   numArtworks={this.props.artworks.length}/>
           <button className="button" onClick={this.handleClick}>New Artwork</button>
-          <button className="button" onClick={this.props.toggleSort}>Sort and Filter Artworks</button>
+          {/* <button className="button" onClick={this.props.toggleSort}>Sort and Filter Artworks</button> */}
           <Link to="/login" replace onClick={this.props.handleLogout}><button className="button" id="logout-button">Logout</button></Link>
         </div>
     </div>

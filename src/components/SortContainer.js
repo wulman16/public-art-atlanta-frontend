@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-class SortDialog extends Component {
+class SortContainer extends Component {
 
   state = {
     sortValue: ``,
@@ -91,4 +91,4 @@ class SortDialog extends Component {
   }
 }
 
-export default SortDialog
+export default SortContainer
