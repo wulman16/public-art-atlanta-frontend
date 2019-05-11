@@ -13,12 +13,22 @@ class SortContainer extends Component {
   handleSeenChange = (e) => {
     this.props.handleSeenFilter(e.target.value)
   }
+
+  handleReset = () => {
+    document.getElementById(`sort-select`).value = `default`
+    document.getElementById(`medium-select`).value = `all`
+    document.getElementById(`seen-select`).value = `all`
+    this.props.handleSort(`default`)
+    this.props.handleFilter(`all`)
+    this.props.handleSeenFilter(`all`)
+  }
+
   render() {
     return(
       <div>
         <label>
           Sort Artworks:
-          <select onChange={this.handleSortChange}>
+          <select id="sort-select" onChange={this.handleSortChange}>
             <option value="default">Default</option>
             <option value="nearest">Nearest</option>
             <option value="title">Title</option>
@@ -29,7 +39,7 @@ class SortContainer extends Component {
         </label>
         <label>
           Filter Artworks by Medium:
-          <select onChange={this.handleFilterChange}>
+          <select id="medium-select" onChange={this.handleFilterChange}>
             <option value="all">All</option>
             <option value="sculpture">Sculpture</option>
             <option value="mural">Mural</option>
@@ -43,12 +53,13 @@ class SortContainer extends Component {
         </label>
         <label>
           Filter Artworks by Seen:
-          <select onChange={this.handleSeenChange}>
+          <select id="seen-select" onChange={this.handleSeenChange}>
             <option value="all">All</option>
             <option value="seen">Seen</option>
             <option value="unseen">Unseen</option>
           </select>
         </label>
+        <button className="button" onClick={this.handleReset}>Reset All</button>
       </div>
     )
   }
