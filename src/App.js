@@ -196,6 +196,10 @@ class App extends Component {
     return degrees * (Math.PI / 180)
   }
 
+  sortById = (a, b) => {
+    return (a.id - b.id)
+  }
+
   sortByDistance = (a, b) => {
     let userLat = this.state.currentLocation.lat
     let userLng = this.state.currentLocation.lng
@@ -259,6 +263,11 @@ class App extends Component {
 
   handleSort = category => {
     switch (category) {
+      case `default`:
+        this.setState({
+          artworks: this.state.artworks.sort((a, b) => this.sortById(a, b))
+        })
+        break
       case `nearest`:
         this.setState({
           artworks: this.state.artworks.sort((a, b) => this.sortByDistance(a, b))

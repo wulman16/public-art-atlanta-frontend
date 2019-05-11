@@ -19,7 +19,7 @@ class SortContainer extends Component {
         <label>
           Sort Artworks:
           <select onChange={this.handleSortChange}>
-            <option value="" disabled></option>
+            <option value="default">Default</option>
             <option value="nearest">Nearest</option>
             <option value="title">Title</option>
             <option value="artist">Artist</option>
