@@ -12,6 +12,7 @@ class BodyContainer extends Component {
       <div className="body-container">
         <div>
         <SortContainer
+              handleSearchChange={this.props.handleSearchChange}
               handleSort={this.props.handleSort}
               handleFilter={this.props.handleFilter}
               handleSeenFilter={this.props.handleSeenFilter}

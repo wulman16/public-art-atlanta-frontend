@@ -19,6 +19,7 @@ const initialState = {
     lat: null,
     lng: null
   },
+  search: ``,
   filter: `all`,
   seenFilter: `all`
 }
@@ -196,6 +197,12 @@ class App extends Component {
     return degrees * (Math.PI / 180)
   }
 
+  handleSearchChange = term => {
+    this.setState({
+      search: term
+    })
+  }
+
   sortById = (a, b) => {
     return (a.id - b.id)
   }
@@ -352,6 +359,9 @@ class App extends Component {
           return artwork.medium === this.state.filter
         })
     }
+    desiredArtworks = desiredArtworks.filter(a =>
+      a.title.toLowerCase().includes(this.state.search.toLowerCase())
+      || a.artist.toLowerCase().includes(this.state.search.toLowerCase()))
     return (
       <Router>
       <Switch>
@@ -369,6 +379,7 @@ class App extends Component {
                                                    userName={localStorage.getItem(`name`)}
                                                    seen={this.state.user.seen}
                                                    artworks={desiredArtworks}
+                                                   handleSearchChange={this.handleSearchChange}
                                                    handleSort={this.handleSort}
                                                    handleFilter={this.handleFilter}
                                                    handleSeenFilter={this.handleSeenFilter}

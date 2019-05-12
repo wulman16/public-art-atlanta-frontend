@@ -133,6 +133,7 @@ class Index extends Component {
         <div className="separator"></div>
         <BodyContainer seen={this.props.seen}
                        artworks={this.props.artworks}
+                       handleSearchChange={this.props.handleSearchChange}
                        handleSort={this.props.handleSort}
                        handleFilter={this.props.handleFilter}
                        handleSeenFilter={this.props.handleSeenFilter}

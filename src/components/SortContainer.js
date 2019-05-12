@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Search from './Search'
 
 class SortContainer extends Component {
 
@@ -15,9 +16,11 @@ class SortContainer extends Component {
   }
 
   handleReset = () => {
+    document.getElementById(`search`).value = ``
     document.getElementById(`sort-select`).value = `default`
     document.getElementById(`medium-select`).value = `all`
     document.getElementById(`seen-select`).value = `all`
+    this.props.handleSearchChange(``)
     this.props.handleSort(`default`)
     this.props.handleFilter(`all`)
     this.props.handleSeenFilter(`all`)
@@ -26,6 +29,7 @@ class SortContainer extends Component {
   render() {
     return(
       <div>
+        <Search handleSearchChange={this.props.handleSearchChange} />
         <label>
           Sort Artworks:
           <select id="sort-select" onChange={this.handleSortChange}>
